@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { TodoForm } from '../components/TodoForm';
 import { TodoList } from '../components/TodoList';
 import { ITodo } from '../interfaces';
-import useReducer from '../store/useReducer';
 import todosReducer from '../store/todosReducer';
 
 export const TodosPage: React.FC = () => {
