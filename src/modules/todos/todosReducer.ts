@@ -1,4 +1,4 @@
-import { ITodo } from '../interfaces';
+import { ITodo } from '../../interfaces';
 
 export default function todosReducer(state: ITodo[], action: any) {
     switch (action.type) {

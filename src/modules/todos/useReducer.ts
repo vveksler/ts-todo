@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ITodo } from '../interfaces';
+import { ITodo } from '../../interfaces';
 
 export default function useReducer(reducer: any, initialState: []): [ITodo[], any] {
     const [state, setState] = useState(initialState);
