@@ -1,16 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
+import { TodosDispatch } from '../../context/TodosContext';
+import { addTodo } from '../../modules/todos/todosAC';
 
-interface TodoFormProps {
-    addTodo(title: string): void
-}
-
-export const TodoForm: React.FC<TodoFormProps> = props => {
-    const ref = useRef<HTMLInputElement>(null)
+export const TodoForm: React.FC = () => {
+    const { dispatch } = useContext(TodosDispatch);
+    const ref = useRef<HTMLInputElement>(null);
 
     const keyPressHandler = (event: React.KeyboardEvent) => {
-        if (event.key === 'Enter') {
-            props.addTodo(ref.current!.value)
-            ref.current!.value = ''
+        if (event.key === 'Enter' && ref.current?.value !== '') {
+            dispatch(addTodo(ref.current!.value));
+            ref.current!.value = '';
         }
     };
 

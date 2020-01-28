@@ -3,3 +3,8 @@ export interface ITodo {
     id: number,
     completed: boolean
 }
+
+export interface ITodoContext {
+    dispatch: Object;
+    todos?: ITodo[];
+}

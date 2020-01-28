@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { toggleTodo, removeTodo } from '../../modules/todos/todosAC';
+import { TodosDispatch } from '../../context/TodosContext';
 import { ITodo } from '../../interfaces';
 
-type TodoListProps = {
-    todos: ITodo[];
-    onToggle(id: number): void;
-    onRemove: (id: number) => void;
-};
+export const TodoList: React.FC = () => {
+    const { dispatch, todos } = useContext(TodosDispatch);
 
-export const TodoList: React.FC<TodoListProps> = ({
-    todos,
-    onToggle,
-    onRemove
-}) => {
     const removeHandler = (id: number) => (event: React.MouseEvent) => {
         event.preventDefault();
+        const action = removeTodo(id);
+        const shouldRemove = window.confirm('Are you sure want to remove todo');
 
-        onRemove(id);
+        if (shouldRemove) dispatch(action);
+    };
+
+    const toggleHandler = (id: number) => (event: React.ChangeEvent) => {
+        const action = toggleTodo(id);
+
+        dispatch(action);
     };
 
     return (
@@ -31,7 +33,7 @@ export const TodoList: React.FC<TodoListProps> = ({
                                 <input
                                     type="checkbox"
                                     checked={todo.completed}
-                                    onChange={onToggle.bind(null, todo.id)}
+                                    onChange={toggleHandler(todo.id)}
                                 />
                                 <span>{todo.title}</span>
                                 <i
