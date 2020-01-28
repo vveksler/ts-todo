@@ -2,15 +2,14 @@ import React, { useEffect, useReducer } from 'react';
 import { TodoForm } from '../components/TodoForm';
 import { TodoList } from '../components/TodoList';
 import { ITodo } from '../interfaces';
+import { getItems, setItems } from '../services/localSrorage';
 import todosReducer from '../store/todosReducer';
 
 export const TodosPage: React.FC = () => {
     const [todos, dispatch] = useReducer(todosReducer, []);
 
     useEffect(() => {
-        const saved = JSON.parse(
-            localStorage.getItem('todos') || '[]'
-        ) as ITodo[];
+        const saved = getItems('todos');
 
         dispatch({
             type: 'fetchTodos',
@@ -19,7 +18,7 @@ export const TodosPage: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('todos', JSON.stringify(todos));
+        setItems('todos', todos);
     }, [todos]);
 
     const addHandler = (title: string) => {

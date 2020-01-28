@@ -6,7 +6,7 @@ export default function useReducer(reducer: any, initialState: []): [ITodo[], an
 
     function dispatch(action: Object) {
         const nextState = reducer(state, action);
-        
+
         setState(nextState);
     }
 
