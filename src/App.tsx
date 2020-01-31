@@ -14,6 +14,11 @@ const App: React.FC = () => {
                 <Switch>
                     <Route component={TodosPage} path="/" exact />
                     <Route component={AboutPage} path="/about" />
+                    <Route
+                        path="*"
+                        component={() => <h1>Page not found 404</h1>}
+                    />{' '}
+                    />
                 </Switch>
             </div>
         </BrowserRouter>
