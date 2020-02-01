@@ -14,7 +14,7 @@ export const TodoList: React.FC = () => {
     if (shouldRemove) dispatch(action);
   };
 
-  const toggleHandler = (id: number) => (event: React.ChangeEvent) => {
+  const toggleHandler = (id: number) => () => {
     const action = toggleTodo(id);
 
     dispatch(action);
@@ -39,9 +39,7 @@ export const TodoList: React.FC = () => {
                 <i
                   className="material-icons red-text"
                   onClick={removeHandler(todo.id)}
-                >
-                  delete
-                                </i>
+                >delete</i>
               </label>
             </li>
           );
