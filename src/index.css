@@ -16,10 +16,6 @@ code {
     padding: 0 1rem;
 }
 
-.mt2 {
-    margin-top: 10px;
-}
-
 .todo {
     margin-bottom: 1rem;
 }
@@ -33,13 +29,13 @@ code {
 }
 
 .todo label {
-    width: 100%;
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
     padding: 1rem;
-    background: #f3f3f3;
+    background: whitesmoke;
 }
 
 .todo i {
