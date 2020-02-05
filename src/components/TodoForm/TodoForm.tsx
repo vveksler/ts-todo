@@ -1,31 +1,23 @@
-import React, { useRef, useContext } from 'react';
-import { TodosDispatch } from '../../context/TodosContext';
+import React, { useRef } from 'react';
+import { useDispatch } from 'react-redux'
 import { addTodo } from '../../modules/todos/todosAC';
 
 export const TodoForm: React.FC = () => {
-  const { dispatch } = useContext(TodosDispatch);
-  // const [title, setTitle] = useState<string>('')
+  const dispatch = useDispatch()
   const ref = useRef<HTMLInputElement>(null);
-
-
-  // const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setTitle(event.target.value)
-  // }
-
   const keyPressHandler = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' && ref.current?.value !== '') {
-      dispatch(addTodo(ref.current!.value));
+      const action = ref.current!.value
+      
+      dispatch(addTodo(action))
       ref.current!.value = '';
-      // console.log(title)
-      // setTitle('')
     }
   };
 
+  console.log('render Todo Form');
   return (
     <div className="input-field">
       <input
-        // onChange={changeHandler}
-        // value={title}
         ref={ref}
         onKeyPress={keyPressHandler}
         type="text"

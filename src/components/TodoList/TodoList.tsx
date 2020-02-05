@@ -1,49 +1,21 @@
-import React, { useContext } from 'react';
-import { toggleTodo, removeTodo } from '../../modules/todos/todosAC';
-import { TodosDispatch } from '../../context/TodosContext';
-import { ITodo } from '../../interfaces';
+import React from 'react';
+import { useSelector } from 'react-redux'
+import { getTodos } from '../../modules/todos/todosSelectors'
+import { ITodo, IStore } from '../../interfaces';
+import { TodoItem } from '../TodoItem'
 
 export const TodoList: React.FC = () => {
-  const { dispatch, todos } = useContext(TodosDispatch);
+  const todos = useSelector((state: IStore) => getTodos(state));
 
-  const removeHandler = (id: number) => (event: React.MouseEvent) => {
-    event.preventDefault();
-    const action = removeTodo(id);
-    const shouldRemove = window.confirm('Are you sure want to remove todo');
-
-    if (shouldRemove) dispatch(action);
-  };
-
-  const toggleHandler = (id: number) => () => {
-    const action = toggleTodo(id);
-
-    dispatch(action);
-  };
-
+  console.log('render Todo List');
   return (
     <ul data-testid="todo-list">
       {todos.length ? (
-        todos.map((todo: ITodo) => {
-          const classes = ['todo'];
-          if (todo.completed) classes.push('completed');
-
-          return (
-            <li className={classes.join(' ')} key={todo.id}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={todo.completed}
-                  onChange={toggleHandler(todo.id)}
-                />
-                <span>{todo.title}</span>
-                <i
-                  className="material-icons red-text"
-                  onClick={removeHandler(todo.id)}
-                >delete</i>
-              </label>
-            </li>
-          );
-        })
+        todos.map((todo: ITodo) =>
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+          ></TodoItem>)
       ) : (
           <p className="center">List of todos empty...</p>
         )}

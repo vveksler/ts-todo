@@ -1,4 +1,5 @@
 import { ITodo } from '../../interfaces';
+import { getTodos as getTodosFromStorage } from '../../services/localSrorage'
 
 export const addTodo = (title: string) => {
   const newTodo: ITodo = {
@@ -20,7 +21,6 @@ export const toggleTodo = (id: number) => ({
   }
 })
 
-
 export const removeTodo = (id: number) =>
   ({
     type: 'remove',
@@ -29,10 +29,11 @@ export const removeTodo = (id: number) =>
     }
   });
 
-export const fetchTodos = (savedTodos: ITodo[]) => {
+export const fetchTodos = () => {
+  const todos = getTodosFromStorage()
+
   return {
     type: 'fetchTodos',
-    payload: savedTodos
+    payload: todos
   }
-
 }

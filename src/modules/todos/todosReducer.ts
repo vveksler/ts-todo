@@ -1,9 +1,9 @@
-import { ITodo } from '../../interfaces';
+import { ITodo, IActionTodo } from '../../interfaces';
 
-export default function todosReducer(state: ITodo[], action: any) {
+export default function todosReducer(state: ITodo[] = [], action: IActionTodo): ITodo[] {
     switch (action.type) {
         case 'add':
-            return [action.payload, ...state];
+            return [action.payload, ...state]
         case 'remove':
             return state.filter(todo => todo.id !== action.payload.id);
         case 'toggle':

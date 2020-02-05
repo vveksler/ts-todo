@@ -1,7 +1,8 @@
 import { ITodo } from '../interfaces';
 
-export const getItems = (items: string) => JSON.parse(
-    localStorage.getItem(items) || '[]'
+export const getTodos = () => JSON.parse(
+    localStorage.getItem('todos') || '[]'
 ) as ITodo[];
 
-export const setItems = (title: string, items: Array<ITodo>) => localStorage.setItem(title, JSON.stringify(items));
+export const setTodos = (todos: ITodo[]) =>
+    localStorage.setItem('todos', JSON.stringify(todos))

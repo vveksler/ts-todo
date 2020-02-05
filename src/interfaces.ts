@@ -8,3 +8,12 @@ export interface ITodoContext {
     dispatch: Object;
     todos?: ITodo[];
 }
+
+export interface IActionTodo {
+    type: string,
+    payload: any
+}
+
+export interface IStore {
+    todos: ITodo[]
+}
